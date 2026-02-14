@@ -85,3 +85,172 @@ Results Artifacts
   ├── Power samples
   ├── Pareto plots
   ├── Profiler traces
+
+
+## 📈 Day-by-Day Engineering Breakdown
+
+### 1️⃣ Baseline RAG Execution
+
+- FAISS index with MiniLM embeddings  
+- Cross-encoder reranker  
+- TinyLlama generator  
+- End-to-end timing breakdown  
+
+**Measured:**
+
+- Retrieval ms  
+- Rerank ms  
+- Generation ms  
+- Total latency  
+
+---
+
+### 2️⃣ Config Sweep & Concurrency Evaluation
+
+Built a clean experiment runner that sweeps:
+
+- `max_new_tokens`  
+- Concurrency  
+- Execution path (pipeline vs direct generate)  
+
+**Generated:**
+
+- p50 / p95 latency  
+- Throughput (RPS)  
+- Tokens/sec  
+
+---
+
+### 3️⃣ GPU Profiling & Bottleneck Discovery
+
+Used `torch.profiler` to identify:
+
+- Kernel launch overhead  
+- Attention compute dominance  
+- CPU-GPU synchronization points  
+
+**Applied fix:**
+
+- Removed high-level pipeline wrapper  
+- Used inference mode  
+- Explicit device placement  
+
+**Measured improvement:**
+
+~15% latency reduction.
+
+---
+
+### 4️⃣ Power Measurement & Energy per Query
+
+Instrumented GPU board power using NVML at 5 Hz.
+
+**Computed:**
+
+- Average watts  
+- Joules per query  
+- Energy per token  
+
+**Generated:**
+
+Latency vs Energy Pareto curve.
+
+**Observation:**
+
+Two configs with similar latency had noticeably different energy profiles.
+
+---
+
+### 5️⃣ Triton-Style Evaluation Loop
+
+Simulated production serving conditions:
+
+- Warmup phase  
+- Fixed request rate  
+- Concurrency sweep  
+- Config comparison  
+
+**Generated:**
+
+- Auto markdown report  
+- Baseline vs best latency  
+- Best throughput  
+- Best energy per query  
+
+This mirrors internal evaluation workflows.
+
+---
+
+### 6️⃣ RTL Bridge — Toggle-Level Power Analysis
+
+To connect software optimization to hardware behavior:
+
+- Wrote baseline Verilog MAC block  
+- Implemented optimized operand isolation variant  
+- Simulated using `iverilog`  
+- Dumped VCD waveforms  
+- Counted switching activity via Python  
+
+Initial attempt increased toggles (design mistake).
+
+After redesigning gating logic:
+
+Switching activity reduced by **35.5%**.
+
+Dynamic power ∝ switching activity.
+
+This validates hardware-aware optimization reasoning.
+
+---
+
+## 📉 Representative Results
+
+### ⚡ Latency Distribution
+
+- p50: ~2.76s (optimized)  
+- p95 reduced relative to baseline  
+- Improved tokens/sec  
+
+### 🔋 Energy
+
+- ~185J per query (optimized)  
+- Lower board power average  
+
+### 🧠 RTL Switching
+
+| Design    | Total Toggles | Reduction |
+|-----------|--------------:|----------:|
+| Baseline  | 4219          | —         |
+| Optimized | 2719          | 35.5%     |
+
+---
+
+## 🧰 Tech Stack
+
+| Layer | Technology |
+|-------|------------|
+| Language | Python |
+| Framework | PyTorch |
+| Retrieval | FAISS |
+| Profiling | torch.profiler |
+| Power Metrics | NVML |
+| Serving Simulation | Custom evaluation loop |
+| RTL Simulation | iverilog |
+| Toggle Analysis | Python VCD parser |
+
+---
+
+## 📂 Repository Structure
+
+```text
+perfwattlab/
+├── day1_rag_core.ipynb
+├── day2_config_sweep.ipynb
+├── day3_profiling.ipynb
+├── day4_power_measurement.ipynb
+├── day5_eval_loop.ipynb
+├── day6_rtl_toggle_fix.ipynb
+├── scripts/
+├── results/
+├── figures/
+└── rtl/
