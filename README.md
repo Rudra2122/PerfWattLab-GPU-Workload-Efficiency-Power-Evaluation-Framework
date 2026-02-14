@@ -85,7 +85,7 @@ Results Artifacts
   ├── Power samples
   ├── Pareto plots
   ├── Profiler traces
-
+```
 
 ## 📈 Day-by-Day Engineering Breakdown
 
@@ -254,3 +254,4 @@ perfwattlab/
 ├── results/
 ├── figures/
 └── rtl/
+```
