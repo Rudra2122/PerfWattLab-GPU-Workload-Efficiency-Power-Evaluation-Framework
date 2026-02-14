@@ -255,3 +255,60 @@ perfwattlab/
 ├── figures/
 └── rtl/
 ```
+
+## ▶️ Reproduce
+
+### Install
+
+```bash
+pip install -r requirements.txt
+```
+### Run Core Experiment
+```bash
+python run_sweep.py
+```
+### Run Power Sampling
+```bash
+python power_measurement.py
+```
+### Run RTL Toggle Analysis
+```bash
+iverilog mac_baseline.v
+iverilog mac_optimized.v
+python toggle_counter.py
+```
+
+## 📊 Figures
+
+### Add the following visual artifacts:
+```bash
+figures/latency_vs_energy.png
+figures/profiler_before.png
+figures/profiler_after.png
+figures/rtl_toggle_comparison.png
+```
+
+##⚠️ Limitations
+
+- Evaluated on Colab T4 GPU
+
+- NVML sampling at 5 Hz (not high-resolution power rail)
+
+- RTL power estimated via toggle count (not signoff tool like PrimeTime PX)
+
+- Single-node setup
+
+## 🧭 Future Work
+
+- Integrate Triton Inference Server directly
+
+- Add DCGM exporter + Prometheus integration
+
+- Extend to multi-GPU workloads
+
+- Add automated power-performance modeling
+
+##👤 Author
+
+Rudra
+ML Infrastructure · GPU Workload Efficiency · Hardware-Aware Systems
