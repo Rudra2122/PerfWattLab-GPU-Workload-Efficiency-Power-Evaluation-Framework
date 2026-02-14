@@ -280,13 +280,24 @@ python toggle_counter.py
 
 ## 📊 Figures
 
-### Add the following visual artifacts:
-```bash
-figures/latency_vs_energy.png
-figures/profiler_before.png
-figures/profiler_after.png
-figures/rtl_toggle_comparison.png
-```
+### Latency vs Energy
+![Latency vs Energy](figures/latency_vs_energy.png)
+
+---
+
+### Before Optimization
+![Before Optimization](figures/before_direct.png)
+
+---
+
+### After Optimization
+![After Optimization](figures/after_direct.png)
+
+---
+
+### RTL Toggle Comparison
+![RTL Toggle Comparison](figures/rtl_toggle_comparison.png)
+
 
 ## ⚠️ Limitations
 
