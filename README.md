@@ -310,5 +310,5 @@ figures/rtl_toggle_comparison.png
 
 ## 👤 Author
 
-Rudra
-ML Infrastructure · GPU Workload Efficiency · Hardware-Aware Systems
+Rudra Brahmbhatt
+ML Infrastructure & MLOps Engineer 
