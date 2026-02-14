@@ -16,13 +16,13 @@ The goal is simple:
 
 ### ⚡ Inference Performance
 
-- p50 latency reduced from **~3.27s → ~2.76s** (~15.6% improvement)  
+- p50 latency reduced from **3.27s → 2.76s** (~15.6% improvement)  
 - Throughput improved under optimized execution path  
 - Reduced kernel launch overhead by removing high-level pipeline wrapper  
 
 ### 🔋 Energy Efficiency
 
-- Energy per query reduced from **~191.5J → ~185.3J**  
+- Energy per query reduced from **191.5J → 185.3J**  
 - Lower average GPU board power under optimized execution  
 - Clear latency vs energy Pareto tradeoff curve generated  
 
@@ -137,7 +137,7 @@ Used `torch.profiler` to identify:
 
 **Measured improvement:**
 
-~15% latency reduction.
+15% latency reduction.
 
 ---
 
@@ -288,7 +288,7 @@ figures/profiler_after.png
 figures/rtl_toggle_comparison.png
 ```
 
-##⚠️ Limitations
+## ⚠️ Limitations
 
 - Evaluated on Colab T4 GPU
 
@@ -308,7 +308,7 @@ figures/rtl_toggle_comparison.png
 
 - Add automated power-performance modeling
 
-##👤 Author
+## 👤 Author
 
 Rudra
 ML Infrastructure · GPU Workload Efficiency · Hardware-Aware Systems
