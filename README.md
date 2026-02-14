@@ -250,10 +250,8 @@ perfwattlab/
 ├── day4_power_measurement.ipynb
 ├── day5_eval_loop.ipynb
 ├── day6_rtl_toggle_fix.ipynb
-├── scripts/
 ├── results/
 ├── figures/
-└── rtl/
 ```
 
 ## ▶️ Reproduce
