@@ -1,18 +1,3 @@
-"""
-power.py — GPU board power sampling via NVML and energy-per-query computation.
-
-Key insight from this project:
-Two configurations with nearly identical p50 latency had meaningfully different
-energy profiles. Latency alone does not tell the full story of serving efficiency.
-The Pareto curve (latency vs energy) makes this tradeoff visible.
-
-Limitations (documented honestly):
-  - NVML reports GPU board power, not wall power. Does not include CPU or DRAM.
-  - Sampling at 5 Hz can miss short spikes — energy values are approximations.
-  - In shared environments (Colab, cloud VMs), DVFS and background load affect readings.
-  - Timing alignment is host-timestamp-based, so there is some jitter.
-"""
-
 import threading
 import time
 from pathlib import Path
