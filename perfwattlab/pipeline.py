@@ -1,15 +1,3 @@
-"""
-pipeline.py — RAG pipeline: retrieval, reranking, and generation.
-
-Two generation paths are exposed deliberately:
-  - generate_pipeline(): uses the HuggingFace pipeline API (baseline, higher overhead)
-  - generate_direct():   calls model.generate() directly under inference_mode (optimized)
-
-The difference between these two paths is the core finding of this project.
-The pipeline wrapper adds CPU-side overhead and unnecessary synchronization points
-that are invisible at the metric level but show up clearly in torch.profiler traces.
-"""
-
 import json
 import math
 import re
