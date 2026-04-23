@@ -1,8 +1,7 @@
 """
 sweep.py — Config sweep and benchmark runner.
 
-Runs p50/p95 latency, throughput, and token/sec measurements across
-configurable token lengths, sampling modes, and concurrency levels.
+Runs p50/p95 latency, throughput, and token/sec measurements across configurable token lengths, sampling modes, and concurrency levels.
 Results are written to CSV and JSON for downstream analysis.
 """
 
