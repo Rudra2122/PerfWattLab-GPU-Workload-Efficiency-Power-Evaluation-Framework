@@ -1,13 +1,4 @@
 """
-profiler.py — torch.profiler wrapper for kernel-level execution tracing.
-
-This is the tool that found the core bottleneck in this project.
-
-Standard metrics (p50/p95 latency, throughput) showed acceptable numbers
-even with the pipeline-based generation path. The profiler trace revealed
-the actual problem: CPU-GPU synchronization stalls at the pipeline boundary.
-The GPU was sitting idle between kernel launches, waiting on the CPU wrapper.
-
 How to read the output:
   - Look at cuda_time_total in the key_averages table.
   - If you see aten::copy_ or cudaDeviceSynchronize dominating, that's the
