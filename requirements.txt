@@ -1,0 +1,10 @@
+numpy==1.26.4
+torch>=2.1.0
+faiss-cpu==1.8.0.post1
+sentence-transformers==2.7.0
+transformers==4.41.2
+accelerate==0.30.1
+bitsandbytes==0.43.1
+nvidia-ml-py3
+pandas
+matplotlib

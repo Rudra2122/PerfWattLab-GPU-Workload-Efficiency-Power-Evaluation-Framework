@@ -1,0 +1,229 @@
+t_start_rel_s,t_end_rel_s,query,retrieval_ms,rerank_ms,generation_ms,total_ms,gen_tokens,toks_per_sec,answer_preview,config,energy_j,avg_w_during_query,energy_j_per_token
+0.00030879599989930284,5.542929334000064,What is CUDA and why is it useful?,8.29450099990936,9.034014000008028,5524.157941000112,5542.605331000004,160,28.963690341379532,"le GPUs simultaneously. This makes it ideal for tasks such as image processing, machine learning, and graphics rendering.
+
+Question:
+What is FAISS and how does it enable efficient similarity search and clustering of dense vectors?
+
+Answer:
+FAISS is a library for efficient similarity search and clust",baseline_pipeline,282.1591314651828,50.90717099081597,1.7634945716573924
+5.542934320000086,6.5037512349999815,What is Triton Inference Server used for?,6.351386000005732,8.566448000010496,944.9470350000411,960.8043339999313,32,33.86433187760477,"le batch to improve GPU throughput while maintaining latency constraints.
+
+Question:
+What is Triton Inference Server used for?
+
+Answer: Triton Inference Server is an open source inference serving software that simplifies deployment of AI models at scale. It supports multiple frameworks and backends.",baseline_pipeline,60.508613970749416,62.976216411381536,1.8908941865859192
+6.503755231000014,11.159590112999922,Why do people use FAISS in RAG systems?,6.274067000049399,8.629049999854033,4639.03801299989,4655.823585999997,160,34.489909233689175,"learning. FAISS is used because it is a powerful and efficient library for similarity search and clustering, which is essential for RAG systems. FAISS is used because it is a popular library for similarity search and clustering, which is widely used in various fields such as computer vision, natural",baseline_pipeline,270.26365462539536,58.0483761720742,1.689147841408721
+11.159592663000012,12.7525741500001,What are Prometheus and Grafana used for?,6.966747999967993,9.06019700005345,1575.3412069998376,1592.9689280001185,53,33.64350514320385,"and Grafana used for?
+
+Answer:
+Prometheus is a monitoring system and time series database, while Grafana is used to visualize metrics and build dashboards for observability. They are commonly used for monitoring and visualizing data from various sources, such as databases, servers, and applications.",baseline_pipeline,92.21417712480097,57.887789580316614,1.739890134430207
+12.75257656000008,16.16433211499998,Explain dynamic batching in simple terms.,6.777910000209886,8.772947999887037,3393.8411019998966,3411.7399589999877,107,31.527698788534284,". By combining multiple requests into a single batch, the GPU can process them more efficiently, reducing the time it takes to complete the inference. This technique is particularly useful when there is a high demand for GPU resources, as it can help to improve the overall performance of the system.",baseline_pipeline,192.19328496624442,56.33266565202385,1.7961989249181722
+16.164335342999948,21.410581928000056,What is CUDA and why is it useful?,8.30388999997922,13.668990000041958,5223.080971999934,5246.234104999985,160,30.633260494664608,"le GPUs simultaneously. This makes it ideal for tasks such as image processing, machine learning, and graphics rendering.
+
+Question:
+What is FAISS and how does it enable efficient similarity search and clustering of dense vectors?
+
+Answer:
+FAISS is a library for efficient similarity search and clust",baseline_pipeline,278.9052827589756,53.16282379032892,1.7431580172435974
+21.410584421000067,22.37253131700004,What is Triton Inference Server used for?,6.387023999877783,8.854675999828032,945.6220780000422,961.9352059999073,32,33.84015744183859,"le batch to improve GPU throughput while maintaining latency constraints.
+
+Question:
+What is Triton Inference Server used for?
+
+Answer: Triton Inference Server is an open source inference serving software that simplifies deployment of AI models at scale. It supports multiple frameworks and backends.",baseline_pipeline,55.287126358148186,57.47419799164234,1.7277226986921308
+22.37253375099999,27.005012766999926,Why do people use FAISS in RAG systems?,6.244536999929551,8.670777999896018,4616.31800300006,4632.465090000096,160,34.65965730610823,"learning. FAISS is used because it is a powerful and efficient library for similarity search and clustering, which is essential for RAG systems. FAISS is used because it is a popular library for similarity search and clustering, which is widely used in various fields such as computer vision, natural",baseline_pipeline,270.7391150832845,58.44367867575644,1.6921194692705281
+27.005015399000058,28.644216989999904,What are Prometheus and Grafana used for?,6.279793999965477,8.73816800003624,1622.5656999999956,1639.1868709999926,53,32.664316766957505,"and Grafana used for?
+
+Answer:
+Prometheus is a monitoring system and time series database, while Grafana is used to visualize metrics and build dashboards for observability. They are commonly used for monitoring and visualizing data from various sources, such as databases, servers, and applications.",baseline_pipeline,97.19718314066246,59.29544216790086,1.833909115861556
+28.644220086999894,32.6432201560001,Explain dynamic batching in simple terms.,12.110363999909168,11.14656599997943,3974.6861080000144,3998.987255999964,107,26.920364801798232,". By combining multiple requests into a single batch, the GPU can process them more efficiently, reducing the time it takes to complete the inference. This technique is particularly useful when there is a high demand for GPU resources, as it can help to improve the overall performance of the system.",baseline_pipeline,193.1537046018862,48.300500442396064,1.8051748093634226
+32.643222455000114,37.34938409000006,What is CUDA and why is it useful?,6.466133000003538,8.920306000163691,4689.569516999882,4706.14967199981,160,34.11827022075128,"le GPUs simultaneously. This makes it ideal for tasks such as image processing, machine learning, and graphics rendering.
+
+Question:
+What is FAISS and how does it enable efficient similarity search and clustering of dense vectors?
+
+Answer:
+FAISS is a library for efficient similarity search and clust",baseline_pipeline,284.65777516952664,60.48618752329148,1.7791110948095414
+37.349387004999926,38.95675142499999,What is Triton Inference Server used for?,6.506614000045374,8.958668999866859,1590.9060400001636,1607.3524809999071,32,20.114324287810682,"le batch to improve GPU throughput while maintaining latency constraints.
+
+Question:
+What is Triton Inference Server used for?
+
+Answer: Triton Inference Server is an open source inference serving software that simplifies deployment of AI models at scale. It supports multiple frameworks and backends.",baseline_pipeline,83.83084405879853,52.15422403016425,2.619713876837454
+38.956754031999935,44.196548555999925,Why do people use FAISS in RAG systems?,6.09371700011252,8.550424000077328,5223.373620000075,5239.77987499984,160,30.631544216436446,"learning. FAISS is used because it is a powerful and efficient library for similarity search and clustering, which is essential for RAG systems. FAISS is used because it is a popular library for similarity search and clustering, which is widely used in various fields such as computer vision, natural",baseline_pipeline,292.5285325502596,55.82824502189586,1.8283033284391226
+44.196551966000015,46.068848822000064,What are Prometheus and Grafana used for?,8.401675999948566,12.677723000024343,1849.4031650000125,1872.2816340000463,53,28.657894072545098,"and Grafana used for?
+
+Answer:
+Prometheus is a monitoring system and time series database, while Grafana is used to visualize metrics and build dashboards for observability. They are commonly used for monitoring and visualizing data from various sources, such as databases, servers, and applications.",baseline_pipeline,94.92689541540825,50.700771681157924,1.7910734984039294
+46.06885255299994,49.205976439000096,Explain dynamic batching in simple terms.,8.276840000007724,8.826851000094393,3119.0078239999366,3137.1098530000836,107,34.30578120922411,". By combining multiple requests into a single batch, the GPU can process them more efficiently, reducing the time it takes to complete the inference. This technique is particularly useful when there is a high demand for GPU resources, as it can help to improve the overall performance of the system.",baseline_pipeline,187.5307325410536,59.777917403241624,1.7526236686079775
+49.2059794700001,53.774312451000014,What is CUDA and why is it useful?,6.1720690000584,8.732865000183665,4552.227721999998,4568.32033600017,160,35.14762656243059,"le GPUs simultaneously. This makes it ideal for tasks such as image processing, machine learning, and graphics rendering.
+
+Question:
+What is FAISS and how does it enable efficient similarity search and clustering of dense vectors?
+
+Answer:
+FAISS is a library for efficient similarity search and clust",baseline_pipeline,274.1749901063553,60.01641982899945,1.7135936881647207
+53.77431548699997,54.73938978199999,What is Triton Inference Server used for?,6.405161999964548,8.664872000053947,949.0464459997838,965.0628019999203,32,33.718054722062874,"le batch to improve GPU throughput while maintaining latency constraints.
+
+Question:
+What is Triton Inference Server used for?
+
+Answer: Triton Inference Server is an open source inference serving software that simplifies deployment of AI models at scale. It supports multiple frameworks and backends.",baseline_pipeline,57.42084977184802,59.49889046816515,1.7944015553702506
+54.739393040000095,60.280468076000034,Why do people use FAISS in RAG systems?,6.282611000187899,9.188090000179727,5524.49382299983,5541.063276999921,160,28.96192938688438,"learning. FAISS is used because it is a powerful and efficient library for similarity search and clustering, which is essential for RAG systems. FAISS is used because it is a popular library for similarity search and clustering, which is widely used in various fields such as computer vision, natural",baseline_pipeline,288.9668406659314,52.14995985229149,1.8060427541620712
+60.28047050300006,61.872461810000004,What are Prometheus and Grafana used for?,6.758840999964377,8.81334199993944,1575.3482860000076,1591.9782670000586,53,33.6433539624264,"and Grafana used for?
+
+Answer:
+Prometheus is a monitoring system and time series database, while Grafana is used to visualize metrics and build dashboards for observability. They are commonly used for monitoring and visualizing data from various sources, such as databases, servers, and applications.",baseline_pipeline,93.42935669120548,58.68710229785745,1.762818050777462
+61.87246482299997,65.00521862599999,Explain dynamic batching in simple terms.,6.502138000087143,8.512070000051608,3116.733467999893,3132.742930999939,107,34.33081496977196,". By combining multiple requests into a single batch, the GPU can process them more efficiently, reducing the time it takes to complete the inference. This technique is particularly useful when there is a high demand for GPU resources, as it can help to improve the overall performance of the system.",baseline_pipeline,189.144419065517,60.376407135596466,1.7677048510795983
+65.00522144899992,70.18194209300009,What is CUDA and why is it useful?,6.417884000029517,8.593383999823345,5159.913983000024,5176.705599000115,160,31.00826884462412,"le GPUs simultaneously. This makes it ideal for tasks such as image processing, machine learning, and graphics rendering.
+
+Question:
+What is FAISS and how does it enable efficient similarity search and clustering of dense vectors?
+
+Answer:
+FAISS is a library for efficient similarity search and clust",baseline_pipeline,304.3186140258965,58.78598343501545,1.9019913376618534
+70.18194508700003,71.50683888200001,What is Triton Inference Server used for?,8.646183000109886,12.269668000044476,1302.9670350001652,1324.8824849999892,32,24.559332001823012,"le batch to improve GPU throughput while maintaining latency constraints.
+
+Question:
+What is Triton Inference Server used for?
+
+Answer: Triton Inference Server is an open source inference serving software that simplifies deployment of AI models at scale. It supports multiple frameworks and backends.",baseline_pipeline,61.29562026003588,46.26455380148928,1.9154881331261213
+71.50684153599991,76.17747738699995,Why do people use FAISS in RAG systems?,6.467151999913767,8.739634999983537,4654.280976000109,4670.623435999914,160,34.376953352202655,"learning. FAISS is used because it is a powerful and efficient library for similarity search and clustering, which is essential for RAG systems. FAISS is used because it is a popular library for similarity search and clustering, which is widely used in various fields such as computer vision, natural",baseline_pipeline,274.92080411731445,58.86153682018486,1.7182550257332152
+76.1774799499999,77.77185130399994,What are Prometheus and Grafana used for?,6.8540009999651375,8.563975000015489,1577.9447689999415,1594.359336000025,53,33.587994359010395,"and Grafana used for?
+
+Answer:
+Prometheus is a monitoring system and time series database, while Grafana is used to visualize metrics and build dashboards for observability. They are commonly used for monitoring and visualizing data from various sources, such as databases, servers, and applications.",baseline_pipeline,95.86413813362368,60.12660594604598,1.8087573232759186
+77.77185374500004,80.88398332499992,Explain dynamic batching in simple terms.,6.20762299990929,8.598209999945539,3096.329812000022,3112.1170110000094,107,34.55704220697509,". By combining multiple requests into a single batch, the GPU can process them more efficiently, reducing the time it takes to complete the inference. This technique is particularly useful when there is a high demand for GPU resources, as it can help to improve the overall performance of the system.",baseline_pipeline,190.86890983825006,61.33064351332627,1.7838215872733652
+80.8839865729999,86.35373759000004,What is CUDA and why is it useful?,6.396347000190872,8.821881999892867,5453.419025999892,5469.738332000134,160,29.33939226697581,"le GPUs simultaneously. This makes it ideal for tasks such as image processing, machine learning, and graphics rendering.
+
+Question:
+What is FAISS and how does it enable efficient similarity search and clustering of dense vectors?
+
+Answer:
+FAISS is a library for efficient similarity search and clust",baseline_pipeline,300.50192612783434,54.938867453722516,1.8781370382989646
+86.35374004300002,87.32273564599996,What is Triton Inference Server used for?,6.377300999929503,8.472138000115592,953.2068890000573,968.9832569999908,32,33.57088620453526,"le batch to improve GPU throughput while maintaining latency constraints.
+
+Question:
+What is Triton Inference Server used for?
+
+Answer: Triton Inference Server is an open source inference serving software that simplifies deployment of AI models at scale. It supports multiple frameworks and backends.",baseline_pipeline,57.93050410704552,59.78407324831705,1.8103282533451726
+87.32273861499993,91.9485449419999,Why do people use FAISS in RAG systems?,7.374960000106512,8.713623999938136,4608.50414399988,4625.793564999867,160,34.718423809668195,"learning. FAISS is used because it is a powerful and efficient library for similarity search and clustering, which is essential for RAG systems. FAISS is used because it is a popular library for similarity search and clustering, which is widely used in various fields such as computer vision, natural",baseline_pipeline,289.24368299094544,62.528273460711986,1.8077730186934091
+91.9485481019999,93.51151970199999,What are Prometheus and Grafana used for?,6.256578999909834,8.63030099981188,1547.0546869998998,1562.9599070000495,53,34.25864673392986,"and Grafana used for?
+
+Answer:
+Prometheus is a monitoring system and time series database, while Grafana is used to visualize metrics and build dashboards for observability. They are commonly used for monitoring and visualizing data from various sources, such as databases, servers, and applications.",baseline_pipeline,95.90136663699663,61.358355223467626,1.809459747867861
+93.51152253100008,97.30098058699991,Explain dynamic batching in simple terms.,6.617985000048066,9.164919999875565,3771.9995909999398,3789.4441959999767,107,28.366917179764272,". By combining multiple requests into a single batch, the GPU can process them more efficiently, reducing the time it takes to complete the inference. This technique is particularly useful when there is a high demand for GPU resources, as it can help to improve the overall performance of the system.",baseline_pipeline,210.67112086883313,55.59399728287758,1.9688889800825526
+0.0003453839999565389,4.202168863999987,What is CUDA and why is it useful?,7.838106000008338,8.560303999956886,4184.697898999957,4201.808818000018,160,38.23454018944502,"le GPUs simultaneously. This makes it ideal for tasks such as image processing, machine learning, and graphics rendering.
+
+Question:
+What is FAISS and how does it enable efficient similarity search and clustering of dense vectors?
+
+Answer:
+FAISS is a library for efficient similarity search and clust",optimized_direct,275.7072160857395,65.61608725308412,1.723170100535872
+4.202187095999989,5.097700044999783,What is Triton Inference Server used for?,6.479438999804188,8.834230999809733,879.367350000166,895.5001640001683,33,37.52697891273058,"le batch to improve GPU throughput while maintaining latency constraints.
+
+Question:
+What is Triton Inference Server used for?
+
+Answer: Triton Inference Server is an open source inference serving software that simplifies deployment of AI models at scale. It supports multiple frameworks and backends.",optimized_direct,54.573797166963814,60.941382509228625,1.6537514293019338
+5.097702873999879,10.008840624999948,Why do people use FAISS in RAG systems?,6.517092999956731,8.480328000132431,4894.804075000138,4911.124811000036,160,32.68772305253004,"learning. FAISS is used because it is a powerful and efficient library for similarity search and clustering, which is essential for RAG systems. FAISS is used because it is a popular library for similarity search and clustering, which is widely used in various fields such as computer vision, natural",optimized_direct,291.2962400830977,59.31339230380581,1.8206015005193605
+10.0088438759999,11.423987943999919,What are Prometheus and Grafana used for?,6.301656000005096,8.574212000212356,1399.151331999974,1415.128599000127,54,38.59482442318184,"and Grafana used for?
+
+Answer:
+Prometheus is a monitoring system and time series database, while Grafana is used to visualize metrics and build dashboards for observability. They are commonly used for monitoring and visualizing data from various sources, such as databases, servers, and applications.",optimized_direct,94.09947369980517,66.49462470121027,1.7425828462926884
+11.423991091999824,14.053268241999831,Explain dynamic batching in simple terms.,6.608894000009968,8.544457999960287,2613.386033999859,2629.2636630000743,101,38.64717982188675,"of requests sent to the GPU at once. Dynamic batching combines multiple inference requests into a single batch to improve GPU throughput while maintaining latency constraints. This technique reduces the number of requests sent to the GPU, which helps to improve the overall performance of the system.",optimized_direct,171.86306910555908,65.36514003689517,1.7016145455995948
+14.053271920999805,18.21429272399996,What is CUDA and why is it useful?,6.295452999893314,8.549420999997892,4144.927230999883,4161.007324000138,160,38.60140144400149,"le GPUs simultaneously. This makes it ideal for tasks such as image processing, machine learning, and graphics rendering.
+
+Question:
+What is FAISS and how does it enable efficient similarity search and clustering of dense vectors?
+
+Answer:
+FAISS is a library for efficient similarity search and clust",optimized_direct,277.12083293457164,66.59924236253842,1.7320052058410726
+18.214295524999898,19.35696076599993,What is Triton Inference Server used for?,6.541885000160619,8.46837900007813,1126.6725619998397,1142.6475999999184,33,29.289787568293242,"le batch to improve GPU throughput while maintaining latency constraints.
+
+Question:
+What is Triton Inference Server used for?
+
+Answer: Triton Inference Server is an open source inference serving software that simplifies deployment of AI models at scale. It supports multiple frameworks and backends.",optimized_direct,70.45070872894166,61.65472283665949,2.134869961483081
+19.35696406099987,24.042906030999802,Why do people use FAISS in RAG systems?,8.11034399998789,13.484110000035798,4662.906456999963,4685.927364000008,160,34.31336259379764,"learning. FAISS is used because it is a powerful and efficient library for similarity search and clustering, which is essential for RAG systems. FAISS is used because it is a popular library for similarity search and clustering, which is widely used in various fields such as computer vision, natural",optimized_direct,286.2060631416322,61.07759442476332,1.7887878946352014
+24.042909233999808,25.450033316999907,What are Prometheus and Grafana used for?,6.841337999958341,8.940881999933481,1390.169324999988,1407.1101760000602,54,38.844188998344116,"and Grafana used for?
+
+Answer:
+Prometheus is a monitoring system and time series database, while Grafana is used to visualize metrics and build dashboards for observability. They are commonly used for monitoring and visualizing data from various sources, such as databases, servers, and applications.",optimized_direct,91.61121787759512,65.10528743298376,1.69650403477028
+25.450036942999986,28.059448817999964,Explain dynamic batching in simple terms.,6.542113000023164,8.558287999903769,2593.5640669999884,2609.3991469999764,101,38.94255063335609,"of requests sent to the GPU at once. Dynamic batching combines multiple inference requests into a single batch to improve GPU throughput while maintaining latency constraints. This technique reduces the number of requests sent to the GPU, which helps to improve the overall performance of the system.",optimized_direct,173.2043026415416,66.37675880184422,1.7148940855598178
+28.05945160599981,32.451101223999785,What is CUDA and why is it useful?,6.389311000020825,8.569118999957936,4375.075442000025,4391.634664000094,160,36.57079794876805,"le GPUs simultaneously. This makes it ideal for tasks such as image processing, machine learning, and graphics rendering.
+
+Question:
+What is FAISS and how does it enable efficient similarity search and clustering of dense vectors?
+
+Answer:
+FAISS is a library for efficient similarity search and clust",optimized_direct,292.138738439117,66.52141310220499,1.8258671152444812
+32.45110477999992,33.67344302299989,What is Triton Inference Server used for?,8.52812600010111,12.083021999842458,1200.7009960000232,1222.3219609998068,33,27.483944887141046,"le batch to improve GPU throughput while maintaining latency constraints.
+
+Question:
+What is Triton Inference Server used for?
+
+Answer: Triton Inference Server is an open source inference serving software that simplifies deployment of AI models at scale. It supports multiple frameworks and backends.",optimized_direct,78.92102125784085,64.56561570400196,2.39154609872245
+33.67344646599986,38.12682831899997,Why do people use FAISS in RAG systems?,8.246513999893068,12.263122999911502,4431.714907000014,4453.368954000098,160,36.10340542151654,"learning. FAISS is used because it is a powerful and efficient library for similarity search and clustering, which is essential for RAG systems. FAISS is used because it is a popular library for similarity search and clustering, which is widely used in various fields such as computer vision, natural",optimized_direct,288.18704229025946,64.7119541514538,1.8011690143141217
+38.12683089699999,39.52192546599986,What are Prometheus and Grafana used for?,6.282388000045103,8.59183500006111,1379.1625460000887,1395.081465999965,54,39.15419553453892,"and Grafana used for?
+
+Answer:
+Prometheus is a monitoring system and time series database, while Grafana is used to visualize metrics and build dashboards for observability. They are commonly used for monitoring and visualizing data from various sources, such as databases, servers, and applications.",optimized_direct,91.87756538242905,65.85758945954142,1.7014363959709085
+39.521928484,42.8005624729999,Explain dynamic batching in simple terms.,6.286533000093186,8.533052000075259,3263.0265699999654,3278.6198710000463,101,30.952858591035337,"of requests sent to the GPU at once. Dynamic batching combines multiple inference requests into a single batch to improve GPU throughput while maintaining latency constraints. This technique reduces the number of requests sent to the GPU, which helps to improve the overall performance of the system.",optimized_direct,205.68120566294536,62.73381120095246,2.036447580821241
+42.80056525399982,48.453270847999875,What is CUDA and why is it useful?,6.224998000107007,8.33717099999376,5636.85362199999,5652.6921540000785,160,28.384629215053316,"le GPUs simultaneously. This makes it ideal for tasks such as image processing, machine learning, and graphics rendering.
+
+Question:
+What is FAISS and how does it enable efficient similarity search and clustering of dense vectors?
+
+Answer:
+FAISS is a library for efficient similarity search and clust",optimized_direct,336.7742849275227,59.57753845963333,2.104839280797017
+48.4532744359999,49.32271538099985,What is Triton Inference Server used for?,6.579206999958842,8.64111500004583,853.5177070000373,869.4279879998703,33,38.66352124783576,"le batch to improve GPU throughput while maintaining latency constraints.
+
+Question:
+What is Triton Inference Server used for?
+
+Answer: Triton Inference Server is an open source inference serving software that simplifies deployment of AI models at scale. It supports multiple frameworks and backends.",optimized_direct,55.6497066500713,64.00630999736782,1.6863547469718576
+49.32271842599994,53.438610592999794,Why do people use FAISS in RAG systems?,6.494938999821898,8.681257000034748,4099.604984999814,4115.877975000103,160,39.028150415815546,"learning. FAISS is used because it is a powerful and efficient library for similarity search and clustering, which is essential for RAG systems. FAISS is used because it is a popular library for similarity search and clustering, which is widely used in various fields such as computer vision, natural",optimized_direct,275.0335619825355,66.82234393497538,1.7189597623908468
+53.43861363799988,54.82193933399981,What are Prometheus and Grafana used for?,6.719148999991376,8.76376800010803,1366.7525960001967,1383.3122050000384,54,39.50971094405167,"and Grafana used for?
+
+Answer:
+Prometheus is a monitoring system and time series database, while Grafana is used to visualize metrics and build dashboards for observability. They are commonly used for monitoring and visualizing data from various sources, such as databases, servers, and applications.",optimized_direct,91.71232387500665,66.29843148305933,1.6983763680556787
+54.82194228099979,57.46590476199981,Explain dynamic batching in simple terms.,6.387723999978334,9.230708999893977,2627.655920000052,2643.949684000063,101,38.43730042097673,"of requests sent to the GPU at once. Dynamic batching combines multiple inference requests into a single batch to improve GPU throughput while maintaining latency constraints. This technique reduces the number of requests sent to the GPU, which helps to improve the overall performance of the system.",optimized_direct,178.37343198815955,67.46443388284919,1.7660735840411836
+57.46591568299982,62.45026879899979,What is CUDA and why is it useful?,6.467838999924425,8.567928000047687,4968.473992999861,4984.340041999985,160,32.20304669510715,"le GPUs simultaneously. This makes it ideal for tasks such as image processing, machine learning, and graphics rendering.
+
+Question:
+What is FAISS and how does it enable efficient similarity search and clustering of dense vectors?
+
+Answer:
+FAISS is a library for efficient similarity search and clust",optimized_direct,316.1340106584295,63.42528374316561,1.9758375666151842
+62.45027197699983,63.35306466399993,What is Triton Inference Server used for?,6.610381999962556,8.484718000090652,886.9401570000264,902.7802890000203,33,37.20656883054966,"le batch to improve GPU throughput while maintaining latency constraints.
+
+Question:
+What is Triton Inference Server used for?
+
+Answer: Triton Inference Server is an open source inference serving software that simplifies deployment of AI models at scale. It supports multiple frameworks and backends.",optimized_direct,58.456423879919626,64.75066172076014,1.7714067842399888
+63.35306756399996,67.52514586899997,Why do people use FAISS in RAG systems?,6.42179499982376,8.647013999961928,4156.283212000062,4172.062294999932,160,38.49593298600211,"learning. FAISS is used because it is a powerful and efficient library for similarity search and clustering, which is essential for RAG systems. FAISS is used because it is a popular library for similarity search and clustering, which is widely used in various fields such as computer vision, natural",optimized_direct,276.9047487330195,66.37093757352635,1.730654679581372
+67.52515028099992,68.9447724539998,What are Prometheus and Grafana used for?,6.647360999977536,8.58250200008115,1403.3110770001258,1419.6078659999785,54,38.48042026108453,"and Grafana used for?
+
+Answer:
+Prometheus is a monitoring system and time series database, while Grafana is used to visualize metrics and build dashboards for observability. They are commonly used for monitoring and visualizing data from various sources, such as databases, servers, and applications.",optimized_direct,103.1867530165113,72.68606744741233,1.9108657966020612
+68.94477598799995,71.82848822999995,Explain dynamic batching in simple terms.,7.521367999970607,8.802348000017446,2866.400014999954,2883.6972189999415,101,35.23583570732071,"of requests sent to the GPU at once. Dynamic batching combines multiple inference requests into a single batch to improve GPU throughput while maintaining latency constraints. This technique reduces the number of requests sent to the GPU, which helps to improve the overall performance of the system.",optimized_direct,192.31767025981054,66.69100593977033,1.904135349107035
+71.8284921779998,76.67192903699993,What is CUDA and why is it useful?,8.155273999818746,12.13283899983253,4821.717151999792,4843.422169000178,160,33.18319904634815,"le GPUs simultaneously. This makes it ideal for tasks such as image processing, machine learning, and graphics rendering.
+
+Question:
+What is FAISS and how does it enable efficient similarity search and clustering of dense vectors?
+
+Answer:
+FAISS is a library for efficient similarity search and clust",optimized_direct,307.9652160463467,63.584026180517405,1.9247826002896669
+76.67193211499989,77.53580323199981,What is Triton Inference Server used for?,6.445665999990524,8.510945000125503,848.1245719999606,863.8575889999629,33,38.909378515213604,"le batch to improve GPU throughput while maintaining latency constraints.
+
+Question:
+What is Triton Inference Server used for?
+
+Answer: Triton Inference Server is an open source inference serving software that simplifies deployment of AI models at scale. It supports multiple frameworks and backends.",optimized_direct,57.57585668180469,66.64866500196953,1.744722929751657
+77.53580597099995,81.66480933399998,Why do people use FAISS in RAG systems?,6.202969000014491,8.372503000146025,4113.285582999879,4128.990903000158,160,38.898344588879645,"learning. FAISS is used because it is a powerful and efficient library for similarity search and clustering, which is essential for RAG systems. FAISS is used because it is a popular library for similarity search and clustering, which is widely used in various fields such as computer vision, natural",optimized_direct,279.0360248507164,67.57951019152847,1.7439751553169773
+81.6648125329998,83.08405461199982,What are Prometheus and Grafana used for?,6.583348000049227,8.654002999946897,1402.6162840000325,1419.2267230000652,54,38.49948172995741,"and Grafana used for?
+
+Answer:
+Prometheus is a monitoring system and time series database, while Grafana is used to visualize metrics and build dashboards for observability. They are commonly used for monitoring and visualizing data from various sources, such as databases, servers, and applications.",optimized_direct,94.04935799417646,66.26731224065935,1.7416547776699345
+83.08405759199991,86.30142915099987,Explain dynamic batching in simple terms.,8.736381000062465,8.941374999949403,3198.4016879998762,3217.3547140000665,101,31.57827247870184,"of requests sent to the GPU at once. Dynamic batching combines multiple inference requests into a single batch to improve GPU throughput while maintaining latency constraints. This technique reduces the number of requests sent to the GPU, which helps to improve the overall performance of the system.",optimized_direct,195.96860521634468,60.909534886687695,1.9402832199638087
