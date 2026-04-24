@@ -207,4 +207,3 @@ bash run_rtl.sh
 **Rudra Brahmbhatt**
 MS Computer Science, Texas State University, May 2026
 ML Inference Infrastructure
-[LinkedIn](#) · [GitHub](#)
