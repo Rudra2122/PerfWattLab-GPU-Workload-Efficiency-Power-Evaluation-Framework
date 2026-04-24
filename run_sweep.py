@@ -1,18 +1,3 @@
-"""
-run_sweep.py — Entry point: run config sweep across generation paths.
-
-What this does:
-  1. Loads the RAG pipeline (embedder, reranker, TinyLlama)
-  2. Builds or loads the FAISS index
-  3. Runs a config sweep across token lengths and sampling modes
-  4. Compares baseline (pipeline API) vs optimized (direct generate) paths
-  5. Writes p50/p95 latency and throughput results to results/
-
-Usage:
-    python run_sweep.py
-    python run_sweep.py --data-dir data/ --out-dir results/ --runs 30
-"""
-
 import argparse
 from functools import partial
 from pathlib import Path
