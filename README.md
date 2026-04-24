@@ -1,6 +1,6 @@
 # PerfWattLab: GPU Inference Performance and Power Evaluation Framework
 
-## The Problem I Was Actually Solving
+## Why Standard Benchmarks Lie to You
 
 Standard benchmarks told me throughput looked fine. p50 latency looked acceptable. But p95 wasn't moving, even after I added micro-batching, which should have moved it.
 
