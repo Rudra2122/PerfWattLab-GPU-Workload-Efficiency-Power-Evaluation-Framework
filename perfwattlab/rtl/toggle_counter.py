@@ -1,18 +1,3 @@
-"""
-toggle_counter.py — VCD waveform toggle counter for RTL switching activity analysis.
-
-This connects software-level optimization to hardware-level power behavior.
-Dynamic power in digital circuits is proportional to switching activity (toggle count).
-By reducing unnecessary register updates in the MAC unit when valid=0,
-switching activity dropped 35.5% (4219 -> 2719 toggles).
-
-This validates the hypothesis that software execution efficiency changes
-are reflected at the silicon level — not just in benchmark numbers.
-
-Usage:
-    python toggle_counter.py baseline.vcd optimized.vcd
-"""
-
 import argparse
 import re
 import sys
