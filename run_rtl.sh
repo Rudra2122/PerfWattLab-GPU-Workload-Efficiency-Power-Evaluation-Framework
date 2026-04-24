@@ -1,14 +1,4 @@
 #!/usr/bin/env bash
-# run_rtl.sh — Compile, simulate, and count toggle activity for both MAC designs
-#
-# Requirements: iverilog, vvp (apt install iverilog)
-# Then run: python perfwattlab/rtl/toggle_counter.py baseline.vcd optimized.vcd
-#
-# What this validates:
-#   The optimized MAC unit gates register updates on the valid signal.
-#   When valid=0, registers hold state — no unnecessary switching.
-#   This maps software execution gating to hardware dynamic power reduction.
-
 set -e
 
 RTL_DIR="perfwattlab/rtl"
