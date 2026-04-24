@@ -1,9 +1,3 @@
-// mac_baseline.v — Baseline MAC unit (always switching, even when valid=0)
-//
-// This is the "bad" design for power. Registers update on every clock edge
-// regardless of whether valid input is present. This causes unnecessary
-// switching activity and dynamic power dissipation.
-
 module mac_baseline (
   input  wire        clk,
   input  wire        rst,
