@@ -1,20 +1,3 @@
-"""
-run_profiler.py — Entry point: kernel-level profiling of both generation paths.
-
-This reproduces the core investigation of the project:
-  1. Profile the baseline pipeline path
-  2. Profile the optimized direct path
-  3. Export Chrome traces and print kernel summary tables
-  4. Show the latency delta between the two paths
-
-Open the .json trace files at https://ui.perfetto.dev to see the GPU
-execution timeline and identify synchronization stalls.
-
-Usage:
-    python run_profiler.py
-    python run_profiler.py --trace-dir results/traces --max-tokens 96
-"""
-
 import argparse
 from functools import partial
 from pathlib import Path
