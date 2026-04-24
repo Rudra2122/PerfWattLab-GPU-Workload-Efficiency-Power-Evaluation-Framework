@@ -83,6 +83,12 @@ Used `torch.profiler` to trace execution at the kernel level. The timeline showe
 
 **Result:** 16% latency reduction. Not from a batching change. From removing synchronization that didn't need to be there.
 
+**Before (pipeline path) — GPU gaps visible between kernel launches:**
+![Before](figures/before_direct.png)
+
+**After (direct path) — GPU execution more continuous:**
+![After](figures/after_direct.png)
+
 ### 4. Power Measurement and Energy per Query
 
 Instrumented GPU board power using NVML at 5Hz. Computed average watts, joules per query, and energy per token across all configurations.
@@ -90,6 +96,8 @@ Instrumented GPU board power using NVML at 5Hz. Computed average watts, joules p
 Key finding: two configurations with nearly identical latency had meaningfully different energy profiles. Latency alone doesn't tell the full story of serving efficiency.
 
 Generated a Latency vs Energy Pareto curve to make the tradeoff visible.
+
+![Pareto](figures/latency_vs_energy.png)
 
 ### 5. Production Serving Simulation
 
@@ -111,6 +119,8 @@ First attempt increased toggles due to a design mistake in the gating logic. Aft
 **Switching activity reduced 35.5% (4,219 to 2,719 toggles).**
 
 Dynamic power scales directly with switching activity. This closes the loop between a Python optimization and its effect at the silicon level.
+
+![RTL Toggle Comparison](figures/rtl_toggle_comparison.png)
 
 ---
 
