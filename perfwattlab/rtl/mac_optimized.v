@@ -1,14 +1,3 @@
-// mac_optimized.v — Optimized MAC unit with clock enable / operand isolation
-//
-// Fix: gate register updates on the valid signal.
-// When valid=0, all registers hold their previous values.
-// Inputs do not propagate through the multiplier, eliminating unnecessary
-// switching activity. This is the operand isolation technique used in
-// low-power digital design.
-//
-// Result: 35.5% reduction in toggle count vs mac_baseline.v
-// Dynamic power ∝ switching activity → hardware power reduction validated.
-
 module mac_optimized (
   input  wire        clk,
   input  wire        rst,
