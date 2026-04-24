@@ -1,19 +1,3 @@
-"""
-run_power.py — Entry point: GPU power measurement and energy-per-query analysis.
-
-Runs both generation paths (pipeline baseline vs direct optimized) while
-sampling GPU board power via NVML at 5 Hz. Computes energy per query,
-generates a Latency vs Energy Pareto curve, and writes all results to CSV.
-
-Key finding from this project:
-Two configs with nearly identical p50 latency had meaningfully different
-energy profiles. Latency alone does not capture serving efficiency.
-
-Usage:
-    python run_power.py
-    python run_power.py --out-dir results/power --runs 30
-"""
-
 import argparse
 from functools import partial
 from pathlib import Path
