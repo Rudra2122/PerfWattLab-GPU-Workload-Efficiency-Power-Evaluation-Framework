@@ -1,0 +1,11 @@
+run,scope,metric,baseline,optimized,reduction_pct
+p1_h1,all_signals,events,4429,4429,0.0
+p1_h1,all_signals,bit_toggles,23008,23008,0.0
+p1_h1,internal,events,2005,2005,0.0
+p1_h1,internal,bit_toggles,12520,12520,0.0
+p1_h1,internal+outputs,events,2409,2409,0.0
+p1_h1,internal+outputs,bit_toggles,15831,15831,0.0
+p1_h1,clock,events,823,823,0.0
+p1_h1,clock,bit_toggles,823,823,0.0
+p1_h1,inputs,events,1197,1197,0.0
+p1_h1,inputs,bit_toggles,6354,6354,0.0

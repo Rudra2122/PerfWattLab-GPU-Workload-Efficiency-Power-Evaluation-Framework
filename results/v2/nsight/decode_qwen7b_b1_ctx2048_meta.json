@@ -1,0 +1,10 @@
+{
+  "target": "decode",
+  "model": "Qwen/Qwen2.5-7B-Instruct",
+  "batch": 1,
+  "context": 2048,
+  "wall_ms": 30.596306999768785,
+  "model_bytes_weights": 15231233024,
+  "model_bytes_kv": 117440512,
+  "model_bytes_total": 15348673536
+}

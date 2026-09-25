@@ -1,0 +1,8 @@
+{
+  "target": "rmsnorm",
+  "impl": "compile",
+  "rows": 16384,
+  "hidden": 4096,
+  "wall_ms": 0.3535670000474056,
+  "model_bytes_min": 268443648
+}

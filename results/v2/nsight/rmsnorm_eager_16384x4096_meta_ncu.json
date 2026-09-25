@@ -1,0 +1,8 @@
+{
+  "target": "rmsnorm",
+  "impl": "eager",
+  "rows": 16384,
+  "hidden": 4096,
+  "wall_ms": 2.1818094999161985,
+  "model_bytes_min": 268443648
+}

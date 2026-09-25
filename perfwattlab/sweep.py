@@ -1,8 +1,9 @@
 """
 sweep.py — Config sweep and benchmark runner.
 
-Runs p50/p95 latency, throughput, and token/sec measurements across configurable token lengths, sampling modes, and concurrency levels.
-Results are written to CSV and JSON for downstream analysis.
+Runs p50/p95 latency, throughput and tokens/sec across token lengths and
+sampling modes (single request at a time). The fixed-rate function at the
+bottom is a serialized-server queueing test, not a batching benchmark.
 """
 
 import csv
@@ -124,20 +125,36 @@ def run_sweep(make_rag_fn, out_dir: Path,
 
 
 # ---------------------------------------------------------------------------
-# Concurrency sweep (Triton-style fixed-rate load)
+# Fixed-rate load against a SERIALIZED server (v1 experiment, corrected)
 # ---------------------------------------------------------------------------
 
 def run_fixed_rate(rag_fn, queries: list, concurrency: int,
                    target_rps: float, gpu_lock: Optional[threading.Lock] = None) -> pd.DataFrame:
     """
-    Drive queries at a fixed request rate with bounded concurrency.
-    gpu_lock, if provided, serializes GPU access to emulate single-GPU serving.
-    Returns a DataFrame of per-request latency results.
+    Drive queries at a fixed request rate with bounded client concurrency.
+
+    WHAT THIS IS NOT: a batching server. Every request runs inside
+    `gpu_lock`, so the GPU executes exactly one request at a time at batch
+    size 1. It measures queueing in front of a single-request server — nothing
+    more. It is not comparable to NVIDIA Triton Inference Server or any
+    dynamic/continuous batching system. For real batching see
+    perfwattlab/engine/scheduler.py and run_serving.py (README §7).
+
+    Latency accounting (fixed in v2): latency is measured from each
+    request's SCHEDULED arrival time, so time spent waiting for a client
+    slot (semaphore) or for the GPU lock is included. v1 started the clock
+    after the semaphore, which hid queueing delay (coordinated omission).
+
+    Returned columns:
+      latency_from_arrival_ms — what a client would observe
+      queue_ms               — scheduled arrival → start of service
+      service_ms             — time holding the GPU
     """
-    arrivals = [time.perf_counter() + i / target_rps for i in range(len(queries))]
+    start = time.perf_counter() + 0.05
+    arrivals = [start + i / target_rps for i in range(len(queries))]
     results = []
+    res_lock = threading.Lock()
     sem = threading.Semaphore(concurrency)
-    threads = []
     lock = gpu_lock or threading.Lock()
 
     def worker(i: int):
@@ -146,22 +163,30 @@ def run_fixed_rate(rag_fn, queries: list, concurrency: int,
             time.sleep(arrivals[i] - now)
         sem.acquire()
         try:
-            t0 = time.perf_counter()
             with lock:
+                t_service = time.perf_counter()
                 row = rag_fn(queries[i])
-            t1 = time.perf_counter()
-            row["wall_latency_ms"] = round((t1 - t0) * 1000.0, 2)
+                t_done = time.perf_counter()
+            row["queue_ms"] = round((t_service - arrivals[i]) * 1000.0, 2)
+            row["service_ms"] = round((t_done - t_service) * 1000.0, 2)
+            row["latency_from_arrival_ms"] = round((t_done - arrivals[i]) * 1000.0, 2)
             row["query_index"] = i
-            results.append(row)
+            row["concurrency"] = concurrency
+            row["target_rps"] = target_rps
+            with res_lock:
+                results.append(row)
         finally:
             sem.release()
 
-    for i in range(len(queries)):
-        t = threading.Thread(target=worker, args=(i,))
-        threads.append(t)
+    threads = [threading.Thread(target=worker, args=(i,)) for i in range(len(queries))]
+    for t in threads:
         t.start()
-
     for t in threads:
         t.join()
 
-    return pd.DataFrame(results).sort_values("query_index").reset_index(drop=True)
+    df = pd.DataFrame(results).sort_values("query_index").reset_index(drop=True)
+    service_rps = 1000.0 / max(df["service_ms"].median(), 1e-9)
+    if target_rps > service_rps:
+        print(f"  NOTE: offered load {target_rps} req/s exceeds serialized capacity "
+              f"≈{service_rps:.2f} req/s — the queue grows for the whole run (overloaded).")
+    return df

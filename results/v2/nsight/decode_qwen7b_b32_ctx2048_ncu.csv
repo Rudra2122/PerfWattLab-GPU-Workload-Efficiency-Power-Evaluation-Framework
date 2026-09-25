@@ -1,0 +1,3 @@
+==WARNING== Note: Running with unmodified GPU clocks. If not controlled otherwise, profiling results may be inconsistent.
+==PROF== Connected to process 50526 (/usr/bin/python3.13)
+==PROF== Trying to shutdown target application

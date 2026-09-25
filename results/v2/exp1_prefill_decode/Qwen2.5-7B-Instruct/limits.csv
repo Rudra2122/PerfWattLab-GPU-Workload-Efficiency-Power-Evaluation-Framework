@@ -1,0 +1,4 @@
+prompt_len,out_len,batch,status
+4096,128,32,OOM
+8192,128,16,OOM
+8192,128,32,OOM

@@ -1,0 +1,11 @@
+{
+  "target": "decode",
+  "model": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+  "batch": 32,
+  "context": 1024,
+  "wall_ms": 26.085374499984937,
+  "static_cache": false,
+  "model_bytes_weights": 2200096768,
+  "model_bytes_kv": 738197504,
+  "model_bytes_total": 2938294272
+}

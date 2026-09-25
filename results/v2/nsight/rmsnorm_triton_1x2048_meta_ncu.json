@@ -1,0 +1,8 @@
+{
+  "target": "rmsnorm",
+  "impl": "triton",
+  "rows": 1,
+  "hidden": 2048,
+  "wall_ms": 0.14575950012840622,
+  "model_bytes_min": 12288
+}

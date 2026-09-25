@@ -1,0 +1,3 @@
+context,gqa_kv_heads,mha_heads,gqa_bytes_per_token,mha_bytes_per_token,gqa_mib_per_seq,mha_mib_per_seq,gqa_seqs_per_gib,mha_seqs_per_gib
+512,4,32,22528,180224,11.0,88.0,93.0909090909091,11.636363636363637
+2048,4,32,22528,180224,44.0,352.0,23.272727272727273,2.909090909090909

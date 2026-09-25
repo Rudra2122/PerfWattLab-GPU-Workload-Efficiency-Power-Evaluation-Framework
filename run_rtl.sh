@@ -1,36 +1,7 @@
 #!/usr/bin/env bash
-set -e
-
-RTL_DIR="perfwattlab/rtl"
-
-echo "=== Compiling and simulating MAC designs ==="
-echo ""
-
-cd "$RTL_DIR"
-
-echo "Cleaning previous artifacts..."
-rm -f baseline.vcd optimized.vcd sim_baseline sim_opt
-
-echo "Compiling baseline..."
-iverilog -g2012 -o sim_baseline -DUSE_BASELINE tb.v mac_baseline.v
-vvp sim_baseline
-
-echo "Compiling optimized..."
-iverilog -g2012 -o sim_opt tb.v mac_optimized.v
-vvp sim_opt
-
-echo ""
-echo "VCD files generated:"
-ls -lh baseline.vcd optimized.vcd
-
-cd ../..
-
-echo ""
-echo "=== Counting toggle activity ==="
-python perfwattlab/rtl/toggle_counter.py \
-    perfwattlab/rtl/baseline.vcd \
-    perfwattlab/rtl/optimized.vcd \
-    --out-dir results/rtl
-
-echo ""
-echo "Done. Check results/rtl/ for toggle summary CSVs."
+# Independent RTL experiment (README §11): simulation sweep + scoreboard +
+# bit-level switching activity + optional Yosys cell counts.
+# Requires: iverilog (and optionally yosys).   Ubuntu: sudo apt-get install iverilog yosys
+set -euo pipefail
+cd "$(dirname "$0")"
+python perfwattlab/rtl/rtl_sweep.py --out-dir results/rtl "$@"

@@ -1,3 +1,8 @@
+"""
+run_sweep.py — v1 max_new_tokens sweep for both generation paths (single request
+at a time). Kept for reproducing v1; the v2 experiments are run_exp0.py …
+run_vllm.py (see README §14).
+"""
 import argparse
 from functools import partial
 from pathlib import Path
@@ -5,8 +10,7 @@ from pathlib import Path
 from perfwattlab.pipeline import (
     GEN_MODEL,
     load_models,
-    load_index,
-    build_index,
+    ensure_index,
     rag_once,
 )
 from perfwattlab.sweep import run_sweep, DEFAULT_SWEEP, DEFAULT_QUERIES
@@ -15,15 +19,6 @@ DATA_DIR  = Path("data")
 INDEX_DIR = Path("index")
 OUT_DIR   = Path("results")
 
-SAMPLE_DOCS = {
-    "doc1.txt": "CUDA is a parallel computing platform and programming model developed by NVIDIA. It enables dramatic increases in computing performance by harnessing the power of the GPU.",
-    "doc2.txt": "Triton Inference Server is an open source inference serving software that simplifies deployment of AI models at scale. It supports multiple frameworks and backends.",
-    "doc3.txt": "FAISS is a library for efficient similarity search and clustering of dense vectors. It is commonly used for vector search in retrieval augmented generation pipelines.",
-    "doc4.txt": "Prometheus is a monitoring system and time series database. Grafana is used to visualize metrics and build dashboards for observability.",
-    "doc5.txt": "Dynamic batching combines multiple inference requests into a single batch to improve GPU throughput while maintaining latency constraints.",
-    "doc6.txt": "The KV cache stores attention key and value tensors during autoregressive generation, avoiding redundant recomputation of previous tokens.",
-    "doc7.txt": "vLLM uses PagedAttention to manage the KV cache like virtual memory, enabling efficient serving of many concurrent sequences on a single GPU.",
-}
 
 
 def main():
@@ -39,23 +34,10 @@ def main():
     index_dir = Path(args.index_dir)
     out_dir   = Path(args.out_dir)
 
-    # Write sample docs if data dir is empty
-    data_dir.mkdir(parents=True, exist_ok=True)
-    if not list(data_dir.glob("*.txt")):
-        print("Writing sample documents...")
-        for name, text in SAMPLE_DOCS.items():
-            (data_dir / name).write_text(text)
-
     print("Loading models...")
     embedder, reranker, tokenizer, model, gen_pipe = load_models()
 
-    # Build or load index
-    if not (index_dir / "faiss.index").exists():
-        print("Building FAISS index...")
-        index, chunks = build_index(data_dir, index_dir, embedder)
-    else:
-        print("Loading FAISS index...")
-        index, chunks = load_index(index_dir)
+    index, chunks = ensure_index(data_dir, index_dir, embedder)
 
     print(f"Index loaded: {index.ntotal} vectors, {len(chunks)} chunks\n")
 

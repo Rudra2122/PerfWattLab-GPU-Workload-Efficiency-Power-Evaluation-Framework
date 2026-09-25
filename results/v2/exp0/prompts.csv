@@ -1,0 +1,21 @@
+prompt_id,query,retrieval_ms,rerank_ms,prompt_tokens
+0,What is CUDA and why is it useful?,81.57090500026243,11.898235999979079,229
+1,What is Triton Inference Server used for?,8.326790999490186,10.875803000089945,225
+2,Why do people use FAISS in RAG systems?,7.86005999907502,10.71334699918225,229
+3,What are Prometheus and Grafana used for?,8.485977001328138,11.231898000914953,236
+4,Explain dynamic batching in simple terms.,8.223654000175884,10.364257001128863,227
+5,What does the KV cache store during generation?,8.13327000105346,10.015734998887638,231
+6,How does vLLM manage KV cache memory?,7.368204998783767,11.508994000905659,223
+7,Why is GPU throughput higher with batching?,10.58281400037231,10.849033000340569,227
+8,What is a vector index used for?,7.31865200032189,10.095871999510564,226
+9,How do dashboards help with observability?,7.4415350009076064,9.947170001396444,221
+10,What problem does PagedAttention solve?,7.188440000390983,9.772453999175923,226
+11,Why would you avoid recomputing previous tokens?,7.128119999833871,10.197449999395758,223
+12,What is retrieval augmented generation?,7.288726999831852,10.932304001471493,230
+13,How can you monitor a GPU inference service?,7.241692999741645,9.591860000000452,225
+14,What is the difference between latency and throughput?,7.273025001268252,11.89977300055034,229
+15,How does similarity search work on dense vectors?,9.085532001336105,10.240821000479627,220
+16,What frameworks can an inference server support?,7.573356999273528,9.81583300017519,224
+17,When does batching hurt latency?,7.240389000799041,9.849030999248498,226
+18,What is a time series database?,8.009586001207936,10.375232999649597,229
+19,Why run many sequences concurrently on one GPU?,7.556358999863733,10.697005000110948,226

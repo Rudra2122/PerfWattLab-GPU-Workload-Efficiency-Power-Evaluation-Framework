@@ -1,0 +1,2 @@
+kernel,calls,total_us
+"void pytorch_flash::flash_fwd_kernel<Flash_fwd_kernel_traits<128, 128, 64, 4, false, false, cutlass::half_t, F",28,20533.23900000022

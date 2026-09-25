@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+data/
+index/
+results/rtl/sim/
+results/v2/traces/
+*.vcd
+perfwattlab/rtl/sim_*
+.DS_Store

@@ -1,0 +1,7 @@
+metric,median_baseline_pipeline,median_optimized_direct,pooled_ratio,pooled_lo,pooled_hi,pooled_verdict,paired_ratio,paired_lo,paired_hi,paired_verdict
+total latency (ms),3274.4249,2763.8235,0.8441,0.3645,1.9142,no significant change (CI contains 1.0),0.8935,0.8679,0.9198,significant decrease
+generation latency (ms),3256.4245,2747.028,0.8436,0.3622,1.9234,no significant change (CI contains 1.0),0.8928,0.8673,0.9187,significant decrease
+ms / output token,29.748,26.0854,0.8769,0.8058,0.9433,significant decrease,0.8942,0.8783,0.9102,significant decrease
+energy / query (J),191.5311,185.3456,0.9677,0.4757,2.078,no significant change (CI contains 1.0),0.9961,0.9728,1.0286,no significant change (CI contains 1.0)
+energy / token (J),1.7953,1.7554,0.9778,0.961,1.021,no significant change (CI contains 1.0),0.9977,0.9629,1.0338,no significant change (CI contains 1.0)
+avg board power (W),58.5654,65.4906,1.1182,1.0891,1.1702,significant increase,1.1237,1.1113,1.1333,significant increase

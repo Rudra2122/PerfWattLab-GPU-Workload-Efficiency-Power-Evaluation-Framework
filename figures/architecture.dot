@@ -1,0 +1,79 @@
+digraph G {
+  graph [rankdir=TB, bgcolor="white", fontname="DejaVu Sans", fontsize=15, nodesep=0.35, ranksep=0.45, pad=0.25, newrank=true, compound=true];
+  node  [shape=box, style="rounded,filled", fontname="DejaVu Sans", fontsize=13, color="#8a8f98", penwidth=1.2, margin="0.16,0.08", fillcolor="#ffffff"];
+  edge  [fontname="DejaVu Sans", fontsize=11, color="#4f5560", arrowsize=0.75, penwidth=1.1];
+
+  subgraph cluster_clients {
+    label=<<b>Clients</b>>; style="rounded,filled"; fillcolor="#eaf2fb"; color="#8fb0d8"; margin=10;
+    loadgen [label=<<b>Load generator</b><br/><font point-size="10">open-loop Poisson arrivals<br/>same request stream for every server</font>>];
+    http    [label=<<b>HTTP clients</b><br/><font point-size="10">OpenAI-style, streaming</font>>];
+    { rank=same; loadgen; http; }
+  }
+
+  server [label=<<b>Streaming server</b>  <font point-size="10">aiohttp · SSE</font><br/><font point-size="10">validates requests · streams each token as it is generated</font>>, fillcolor="#fdeceb", color="#d58f8c"];
+  vllm   [label=<<b>vLLM</b>  <font point-size="11">(comparison)</font><br/><font point-size="10">benchmarked with the same<br/>client and request stream</font>>, fillcolor="#eaf0ff", color="#6f8fd0"];
+  { rank=same; server; vllm; }
+
+  subgraph cluster_engine {
+    label=<<b>My serving engine</b>  <font point-size="11">continuous batching — requests join and leave every step</font>>; style="rounded,filled"; fillcolor="#ecf7ed"; color="#8cc592"; margin=14;
+    flow [shape=plain, style="", label=<
+      <table border="0" cellborder="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td port="q"><table border="1" cellborder="0" color="#8a8f98" bgcolor="#ffffff" style="rounded" cellpadding="7"><tr><td><b>Waiting queue</b><br/><font point-size="10">first come, first served</font></td></tr></table></td>
+          <td>  ➜  </td>
+          <td><table border="1" cellborder="0" color="#8a8f98" bgcolor="#ffffff" style="rounded" cellpadding="7"><tr><td><b>Admission</b><br/><font point-size="10">enough free KV blocks?</font></td></tr></table></td>
+          <td>  ➜  </td>
+          <td port="p"><table border="1" cellborder="0" color="#8a8f98" bgcolor="#ffffff" style="rounded" cellpadding="7"><tr><td><b>Prefill</b><br/><font point-size="10">one-shot or chunked</font></td></tr></table></td>
+          <td>  ➜  </td>
+          <td port="d"><table border="1" cellborder="0" color="#8a8f98" bgcolor="#ffffff" style="rounded" cellpadding="7"><tr><td><b>Batched decode</b><br/><font point-size="10">1 token per request per step</font></td></tr></table></td>
+          <td>  ➜  </td>
+          <td><table border="1" cellborder="0" color="#8a8f98" bgcolor="#ffffff" style="rounded" cellpadding="7"><tr><td><b>Retire</b><br/><font point-size="10">free its blocks</font></td></tr></table></td>
+        </tr>
+      </table>>];
+    preempt [label=<<b>Preempt newest</b><br/><font point-size="10">when blocks run out:<br/>free, requeue, recompute</font>>, color="#b07a7a"];
+    kv      [label=<<b>Paged KV cache</b><br/><font point-size="10">16-token blocks · block tables<br/>gathered before attention</font>>, fillcolor="#fff5d9", color="#d2ad55"];
+    { rank=same; preempt; kv; }
+  }
+
+  subgraph cluster_model {
+    label=<<b>Model runtime</b>  <font point-size="11">PyTorch · CUDA · FP16</font>>; style="rounded,filled"; fillcolor="#f1ecfa"; color="#a996d2"; margin=10;
+    model  [label=<<b>Hugging Face model</b><br/><font point-size="10">TinyLlama-1.1B · Qwen2.5-7B<br/>greedy decoding</font>>];
+    triton [label=<<b>Triton RMSNorm</b><br/><font point-size="10">my fused kernel, optional</font>>];
+    { rank=same; model; triton; }
+  }
+  subgraph cluster_fixed {
+    label=<<b>Fixed-batch experiments</b>  <font point-size="11">(separate from the server)</font>>; style="rounded,filled,dashed"; fillcolor="#f5f5f5"; color="#9a9a9a"; margin=10;
+    loop   [label=<<b>Decode loop</b><br/><font point-size="10">per-token timing<br/>chunked prefill · last-token logits</font>>];
+    graphs [label=<<b>Static KV cache + CUDA graph</b><br/><font point-size="10">one decode step captured,<br/>replayed for every token</font>>];
+    { rank=same; loop; graphs; }
+  }
+  { rank=same; model; triton; loop; graphs; }
+
+  subgraph cluster_meas {
+    label=<<b>Measurement</b>>; style="rounded,filled"; fillcolor="#fbf5ea"; color="#d3bd92"; margin=10;
+    prof   [label=<<b>torch.profiler</b><br/><font point-size="10">launch gaps · GPU busy %</font>>];
+    nsight [label=<<b>Nsight Compute / Systems</b><br/><font point-size="10">DRAM bytes · timelines</font>>];
+    nvml   [label=<<b>NVML</b><br/><font point-size="10">energy per token</font>>];
+    stats  [label=<<b>Statistics</b><br/><font point-size="10">95% CIs · env.json</font>>];
+    { rank=same; prof; nsight; nvml; stats; }
+  }
+
+  // edges
+  http -> server [label=" requests"];
+  http -> vllm [style=dashed, color="#6f8fd0", fontcolor="#4f6fb0", label=" same client"];
+  loadgen -> flow:q:n [style=dashed, label=" in-process\n benchmarks"];
+  server -> flow:q:n;
+  flow:d:n -> server [label=" each new token", color="#c0504d", fontcolor="#c0504d"];
+  flow:d:s -> preempt [style=dashed, color="#b07a7a", label=" out of blocks", fontcolor="#8a5a5a"];
+  preempt -> flow:q:s [style=dashed, color="#b07a7a"];
+  flow:p:s -> kv [dir=both, style=dotted, arrowsize=0.6];
+  flow:d:s -> kv [dir=both, style=dotted, arrowsize=0.6];
+  kv -> model [ltail=cluster_engine, lhead=cluster_model, label=" forward pass"];
+  loop -> model [ltail=cluster_fixed, lhead=cluster_model, style=dashed, constraint=false];
+  model -> triton [style=dotted, arrowhead=none];
+
+  // layout
+  server -> vllm [style=invis];
+  model -> nsight [style=invis];
+  graphs -> nvml [style=invis];
+}

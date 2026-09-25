@@ -1,0 +1,2 @@
+backend,n_requests,wall_s,output_tokens,prompt_tokens,throughput_out_tok_s,throughput_req_s,energy_j_per_out_token,avg_power_w,energy_method
+vllm_offline,1024,6.373632726001233,80944,167638,12699.821825281675,160.66190883930167,0.02738666238387033,347.6222731919191,counter

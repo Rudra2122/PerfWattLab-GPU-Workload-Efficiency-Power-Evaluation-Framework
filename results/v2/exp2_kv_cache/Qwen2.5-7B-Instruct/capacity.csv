@@ -1,0 +1,2 @@
+budget_gib,kv_bytes_per_token,max_len,block_size,contiguous_max_concurrent,contiguous_utilization,paged_max_concurrent,paged_utilization,paged_internal_frag_slots
+19.701,57344,32768,16,11,0.012337424538352272,969,0.9804655232381201,7189

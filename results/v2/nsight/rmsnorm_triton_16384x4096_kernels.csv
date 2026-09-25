@@ -1,0 +1,2 @@
+kernel,dram__bytes_read.sum,dram__bytes_write.sum,gpu__time_duration.sum,dram__throughput.avg.pct_of_peak_sustained_elapsed,sm__throughput.avg.pct_of_peak_sustained_elapsed
+_rmsnorm_fwd,134230912.0,118231424.0,183776.0,88.35,27.05

@@ -1,0 +1,9 @@
+# Experiment 3 — serving policies — TinyLlama/TinyLlama-1.1B-Chat-v1.0, mix `heavy_tail`
+
+64 requests per run, open-loop Poisson arrivals, latency from scheduled arrival. KV pool 744 blocks × 16. SLO: TTFT<=2000ms & TPOT<=100ms.
+
+| policy     |   arrival_rate_rps |   throughput_out_tok_s |   goodput_req_s |   ttft_ms_p50 |   ttft_ms_p99 |   tpot_ms_p50 |   tpot_ms_p99 |   itl_p99_ms_p99 |   mean_batch |   mean_padding_waste |   wasted_decode_tokens |   preemptions |   gather_share_of_decode |   slowdown_median |   slowdown_max |   energy_j_per_out_token |
+|:-----------|-------------------:|-----------------------:|----------------:|--------------:|--------------:|--------------:|--------------:|-----------------:|-------------:|---------------------:|-----------------------:|--------------:|-------------------------:|------------------:|---------------:|-------------------------:|
+| continuous |                  2 |                193.463 |           1.611 |        42.572 |       116.41  |        32.168 |        34.521 |           63.706 |        6.059 |                0.403 |                      0 |             0 |                    0.047 |             1.455 |          1.563 |                    0.485 |
+| continuous |                  4 |                325.752 |           2.712 |        42.926 |        77.445 |        35.786 |        40.008 |           65.568 |       10.811 |                0.471 |                      0 |             0 |                    0.08  |             1.61  |          1.827 |                    0.411 |
+| continuous |                  8 |                419.476 |           2.947 |        60.196 |      2671     |        44.758 |        59.275 |          120.078 |       15.813 |                0.481 |                      0 |             3 |                    0.12  |             2.314 |          6.123 |                    0.394 |

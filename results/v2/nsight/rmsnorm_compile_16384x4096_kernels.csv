@@ -1,0 +1,2 @@
+kernel,dram__bytes_read.sum,dram__bytes_write.sum,gpu__time_duration.sum,dram__throughput.avg.pct_of_peak_sustained_elapsed,sm__throughput.avg.pct_of_peak_sustained_elapsed
+triton_red_fused__to_copy_add_mean_mul_pow_rsqrt_0,134231424.0,116587648.0,180480.0,89.37,25.36

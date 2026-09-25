@@ -1,0 +1,3 @@
+design,cells,flops,enable_flops
+mac_baseline,546,84,0
+mac_optimized,546,84,81

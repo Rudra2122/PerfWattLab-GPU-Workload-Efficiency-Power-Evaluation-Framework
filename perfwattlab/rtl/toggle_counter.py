@@ -1,119 +1,136 @@
+"""
+toggle_counter.py — Switching activity from VCD waveforms.
+
+Two counts per signal:
+  events       — number of value changes (a 16-bit bus changing value = 1 event).
+                 This is what v1 reported as "toggles".
+  bit_toggles  — number of individual bit flips (Hamming distance per change,
+                 0<->1 only; transitions from/to x or z at reset are ignored).
+                 Dynamic power tracks bit-level transitions weighted by the
+                 switched capacitance, so this is the better proxy.
+
+Signals are grouped so the design's own activity isn't diluted by signals it
+doesn't control:
+  clock     — clk (identical in both designs; valid-gating does not gate clocks)
+  inputs    — ports driven by the testbench (a, b, c, valid, rst)
+  internal  — the design's registers (a_r, b_r, c_r, c_d, prod, v)
+  outputs   — y, out_valid
+
+Switching activity is a PROXY. No capacitance, no synthesis, no power number.
+
+    python toggle_counter.py baseline.vcd optimized.vcd --out-dir results/rtl
+"""
+
 import argparse
 import re
-import sys
 from collections import defaultdict
 from pathlib import Path
 
 import pandas as pd
 
+CLOCK = {"clk"}
+INPUTS = {"a", "b", "c", "valid", "rst"}
+OUTPUTS = {"y", "out_valid"}
 
-def count_vcd_toggles(vcd_path: str) -> tuple:
-    """
-    Parse a VCD waveform file and count signal transitions (toggles).
 
-    Returns:
-        total_toggles (int): sum of all signal transitions
-        by_signal_df (DataFrame): per-signal toggle counts, sorted descending
-    """
-    id_to_name = {}
-    toggles = defaultdict(int)
-    last_val = {}
+def category(name: str) -> str:
+    if name in CLOCK:
+        return "clock"
+    if name in INPUTS:
+        return "inputs"
+    if name in OUTPUTS:
+        return "outputs"
+    return "internal"
 
-    header_done = False
-    in_dumpvars = False
 
-    with open(vcd_path, "r", errors="ignore") as f:
-        for line in f:
-            line = line.strip()
+def _bits(val: str, width: int) -> str:
+    """Left-extend a VCD vector value to its declared width (VCD rule: pad with 0,
+    or with x/z if the leftmost digit is x/z)."""
+    if len(val) >= width:
+        return val[-width:]
+    pad = val[0] if val[0] in "xz" else "0"
+    return pad * (width - len(val)) + val
+
+
+def count_vcd(vcd_path: str) -> pd.DataFrame:
+    ids = {}                # vcd id -> (name, width)
+    last = {}
+    events = defaultdict(int)
+    flips = defaultdict(int)
+    scope = []
+    in_defs = True
+    with open(vcd_path, errors="ignore") as f:
+        for raw in f:
+            line = raw.strip()
             if not line:
                 continue
-
-            # Parse variable declarations
-            if line.startswith("$var"):
-                parts = line.split()
-                vcd_id = parts[3]
-                name = parts[4]
-                id_to_name[vcd_id] = name
+            if in_defs:
+                if line.startswith("$scope"):
+                    scope.append(line.split()[2])
+                elif line.startswith("$upscope"):
+                    scope.pop()
+                elif line.startswith("$var"):
+                    p = line.split()
+                    width, vid, name = int(p[2]), p[3], p[4]
+                    ids.setdefault(vid, (name, width))   # aliased ids share activity
+                elif line.startswith("$enddefinitions"):
+                    in_defs = False
                 continue
-
-            if line.startswith("$dumpvars"):
-                in_dumpvars = True
+            if line[0] in "#$":
                 continue
-            if in_dumpvars and line.startswith("$end"):
-                in_dumpvars = False
-                header_done = True
+            if line[0] in "bB":
+                val, vid = line[1:].split()
+            elif line[0] in "01xzXZ":
+                val, vid = line[0], line[1:]
+            else:
+                continue                      # real values etc. — not used here
+            if vid not in ids:
                 continue
-
-            if not header_done:
-                continue
-
-            # Scalar value change: 0!, 1!, x!, z!
-            m = re.match(r"^([01xz])(.+)$", line)
-            if m:
-                val, vcd_id = m.group(1), m.group(2)
-                prev = last_val.get(vcd_id)
-                if prev is not None and prev != val:
-                    toggles[vcd_id] += 1
-                last_val[vcd_id] = val
-                continue
-
-            # Vector value change: b<bits> <id>
-            if line.startswith("b"):
-                parts = line[1:].split()
-                if len(parts) == 2:
-                    bits, vcd_id = parts
-                    prev = last_val.get(vcd_id)
-                    if prev is not None and prev != bits:
-                        toggles[vcd_id] += 1
-                    last_val[vcd_id] = bits
-
-    total = sum(toggles.values())
-    by_signal = [
-        {"signal": id_to_name.get(vid, vid), "toggles": cnt}
-        for vid, cnt in toggles.items()
-    ]
-    by_signal_df = pd.DataFrame(by_signal).sort_values("toggles", ascending=False).reset_index(drop=True)
-
-    return total, by_signal_df
+            width = ids[vid][1]
+            val = _bits(val.lower(), width)
+            prev = last.get(vid)
+            if prev is not None and prev != val:
+                events[vid] += 1
+                flips[vid] += sum(1 for p, q in zip(prev, val) if p in "01" and q in "01" and p != q)
+            last[vid] = val
+    rows = [{"signal": n, "width": w, "category": category(n),
+             "events": events.get(v, 0), "bit_toggles": flips.get(v, 0)} for v, (n, w) in ids.items()]
+    return pd.DataFrame(rows).sort_values(["category", "signal"]).reset_index(drop=True)
 
 
-def compare(baseline_vcd: str, optimized_vcd: str, out_dir: Path = None):
-    """Compare toggle counts between baseline and optimized VCD files."""
-    print(f"Counting toggles in: {baseline_vcd}")
-    base_total, base_df = count_vcd_toggles(baseline_vcd)
-
-    print(f"Counting toggles in: {optimized_vcd}")
-    opt_total, opt_df = count_vcd_toggles(optimized_vcd)
-
-    reduction_pct = 0.0
-    if base_total > 0:
-        reduction_pct = (base_total - opt_total) * 100.0 / base_total
-
-    summary = pd.DataFrame([
-        {"design": "baseline",  "total_toggles": int(base_total), "reduction_pct": 0.0},
-        {"design": "optimized", "total_toggles": int(opt_total),  "reduction_pct": round(reduction_pct, 2)},
-    ])
-
-    print("\n=== Toggle Summary ===")
-    print(summary.to_string(index=False))
-    print(f"\nSwitching activity reduced {reduction_pct:.1f}%")
-    print("Dynamic power ∝ switching activity — this reduction carries through to hardware power.")
-
+def compare(baseline_vcd: str, optimized_vcd: str, out_dir: Path = None, label: str = "") -> pd.DataFrame:
+    b, o = count_vcd(baseline_vcd), count_vcd(optimized_vcd)
+    b["design"], o["design"] = "baseline", "optimized"
+    by_sig = pd.concat([b, o], ignore_index=True)
+    rows = []
+    for scope, filt in [("all_signals", lambda d: d),
+                        ("internal", lambda d: d[d.category == "internal"]),
+                        ("internal+outputs", lambda d: d[d.category.isin(["internal", "outputs"])]),
+                        ("clock", lambda d: d[d.category == "clock"]),
+                        ("inputs", lambda d: d[d.category == "inputs"])]:
+        for metric in ("events", "bit_toggles"):
+            vb, vo = int(filt(b)[metric].sum()), int(filt(o)[metric].sum())
+            rows.append({"scope": scope, "metric": metric, "baseline": vb, "optimized": vo,
+                         "reduction_pct": round(100 * (vb - vo) / vb, 2) if vb else 0.0})
+    summ = pd.DataFrame(rows)
+    if label:
+        summ.insert(0, "run", label)
     if out_dir:
+        out_dir = Path(out_dir)
         out_dir.mkdir(parents=True, exist_ok=True)
-        summary.to_csv(out_dir / "toggle_summary.csv", index=False)
-        base_df.to_csv(out_dir / "toggles_by_signal_baseline.csv", index=False)
-        opt_df.to_csv(out_dir / "toggles_by_signal_optimized.csv", index=False)
-        print(f"\nResults saved to: {out_dir}")
-
-    return summary, base_df, opt_df
+        suf = f"_{label}" if label else ""
+        summ.to_csv(out_dir / f"toggle_summary{suf}.csv", index=False)
+        by_sig.to_csv(out_dir / f"toggles_by_signal{suf}.csv", index=False)
+    return summ
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Count VCD toggle activity")
-    parser.add_argument("baseline", help="Baseline VCD file")
-    parser.add_argument("optimized", help="Optimized VCD file")
-    parser.add_argument("--out-dir", default="results", help="Output directory for CSVs")
-    args = parser.parse_args()
-
-    compare(args.baseline, args.optimized, out_dir=Path(args.out_dir))
+    ap = argparse.ArgumentParser(description="Switching activity from VCD files")
+    ap.add_argument("baseline")
+    ap.add_argument("optimized")
+    ap.add_argument("--out-dir", default="results/rtl")
+    ap.add_argument("--label", default="")
+    a = ap.parse_args()
+    s = compare(a.baseline, a.optimized, Path(a.out_dir), a.label)
+    print(s.to_string(index=False))
+    print("\nSwitching activity is a proxy for dynamic power (no capacitance model, no synthesis).")

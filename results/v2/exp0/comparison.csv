@@ -1,0 +1,22 @@
+comparison,metric,median_pipeline,median_direct,pooled_ratio,pooled_lo,pooled_hi,pooled_verdict,paired_ratio,paired_lo,paired_hi,paired_verdict,median_direct_no_grad
+pipeline → direct,generation latency (ms),3314.2012,2993.1436,0.9031,0.8991,0.9053,significant decrease,0.9002,0.8978,0.9024,significant decrease,
+pipeline → direct,ms / output token,25.7685,23.3839,0.9075,0.9043,0.9117,significant decrease,0.9062,0.9039,0.9083,significant decrease,
+pipeline → direct,energy / query (J),221.646,205.0165,0.925,0.9238,0.9261,significant decrease,0.9182,0.9113,0.9238,significant decrease,
+pipeline → direct,energy / token (J),1.7182,1.6017,0.9322,0.9308,0.9332,significant decrease,0.9243,0.9174,0.9298,significant decrease,
+pipeline → direct,active (above-idle) energy / token (J),0.3154,0.3204,1.0161,0.9801,1.0404,no significant change (CI contains 1.0),0.9918,0.9602,1.0214,no significant change (CI contains 1.0),
+pipeline → direct,average board power (W),66.8065,68.179,1.0205,1.0144,1.0253,significant increase,1.0163,1.0102,1.022,significant increase,
+pipeline → direct,NVML GPU utilization (%),26.9,29.5,1.0967,1.0926,1.1004,significant increase,1.097,1.0936,1.1006,significant increase,
+direct_no_grad → direct,generation latency (ms),,2993.1436,0.9009,0.8979,0.9035,significant decrease,0.899,0.8958,0.9019,significant decrease,3322.3318
+direct_no_grad → direct,ms / output token,,23.3839,0.9009,0.8979,0.9035,significant decrease,0.899,0.8958,0.9019,significant decrease,25.9557
+direct_no_grad → direct,energy / query (J),,205.0165,0.9251,0.9237,0.9261,significant decrease,0.9169,0.9112,0.9223,significant decrease,221.624
+direct_no_grad → direct,energy / token (J),,1.6017,0.9251,0.9237,0.9261,significant decrease,0.9169,0.9112,0.9223,significant decrease,1.7314
+direct_no_grad → direct,active (above-idle) energy / token (J),,0.3204,1.015,0.9771,1.0262,no significant change (CI contains 1.0),0.9825,0.9553,1.0093,no significant change (CI contains 1.0),0.3157
+direct_no_grad → direct,average board power (W),,68.179,1.0219,1.0153,1.0245,significant increase,1.016,1.0105,1.0216,significant increase,66.715
+direct_no_grad → direct,NVML GPU utilization (%),,29.5,1.0946,1.0906,1.1004,significant increase,1.0956,1.0918,1.0994,significant increase,26.95
+pipeline → direct_no_grad,generation latency (ms),3314.2012,,1.0025,0.9986,1.0044,no significant change (CI contains 1.0),1.0013,0.9982,1.0047,no significant change (CI contains 1.0),3322.3318
+pipeline → direct_no_grad,ms / output token,25.7685,,1.0073,1.0047,1.0114,significant increase,1.008,1.0054,1.0108,significant increase,25.9557
+pipeline → direct_no_grad,energy / query (J),221.646,,0.9999,0.9989,1.0011,no significant change (CI contains 1.0),1.0014,0.9953,1.0075,no significant change (CI contains 1.0),221.624
+pipeline → direct_no_grad,energy / token (J),1.7182,,1.0077,1.0065,1.0088,significant increase,1.0081,1.002,1.0141,significant increase,1.7314
+pipeline → direct_no_grad,active (above-idle) energy / token (J),0.3154,,1.0011,0.9886,1.0263,no significant change (CI contains 1.0),1.0095,0.9804,1.0379,no significant change (CI contains 1.0),0.3157
+pipeline → direct_no_grad,average board power (W),66.8065,,0.9986,0.9967,1.0034,no significant change (CI contains 1.0),1.0002,0.9948,1.0054,no significant change (CI contains 1.0),66.715
+pipeline → direct_no_grad,NVML GPU utilization (%),26.9,,1.0019,0.9963,1.0056,no significant change (CI contains 1.0),1.0013,0.9968,1.0058,no significant change (CI contains 1.0),26.95

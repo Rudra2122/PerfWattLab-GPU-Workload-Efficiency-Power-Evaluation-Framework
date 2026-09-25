@@ -1,0 +1,9 @@
+{
+  "target": "prefill",
+  "model": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+  "batch": 8,
+  "prompt": 512,
+  "wall_ms": 67.03686199989534,
+  "model_flops": 9011596361728.0,
+  "model_bytes_weights": 2200096768
+}

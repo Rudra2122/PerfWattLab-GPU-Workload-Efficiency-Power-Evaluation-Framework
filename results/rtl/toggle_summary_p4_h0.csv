@@ -1,0 +1,11 @@
+scope,metric,baseline,optimized,reduction_pct,valid_duty_pct,inputs_held_when_invalid
+all_signals,events,5219,3423,34.41,25.0,False
+all_signals,bit_toggles,23998,12111,49.53,25.0,False
+internal,events,2399,903,62.36,25.0,False
+internal,bit_toggles,13114,3694,71.83,25.0,False
+internal+outputs,events,3001,1205,59.85,25.0,False
+internal+outputs,bit_toggles,16623,4736,71.51,25.0,False
+clock,events,823,823,0.0,25.0,False
+clock,bit_toggles,823,823,0.0,25.0,False
+inputs,events,1395,1395,0.0,25.0,False
+inputs,bit_toggles,6552,6552,0.0,25.0,False
